@@ -18,23 +18,9 @@ class Starship
         return $this->id;
     }
 
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getClass(): string
@@ -42,23 +28,9 @@ class Starship
         return $this->class;
     }
 
-    public function setClass(string $class): self
-    {
-        $this->class = $class;
-
-        return $this;
-    }
-
     public function getCaptain(): string
     {
         return $this->captain;
-    }
-
-    public function setCaptain(string $captain): self
-    {
-        $this->captain = $captain;
-
-        return $this;
     }
 
     public function getStatus(): StarshipStatusEnum
@@ -66,10 +38,17 @@ class Starship
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function getStatusString(): string
     {
-        $this->status = $status;
+        return $this->status->value;
+    }
 
-        return $this;
+    public function getStatusImageFilename(): string
+    {
+        return match ($this->status) {
+            StarshipStatusEnum::WAITING => 'images/status-waiting.png',
+            StarshipStatusEnum::IN_PROGRES => 'images/status-in-progress.png',
+            StarshipStatusEnum::COMPLETED => 'images/status-complete.png',
+        };
     }
 }
